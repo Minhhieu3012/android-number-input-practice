@@ -110,6 +110,64 @@ fun NumberInputApp() {
                     .clip(RoundedCornerShape(18.dp))
                     .border( width = 1.dp, color = Color.Gray,  shape = RoundedCornerShape(18.dp))
             )
+
+            // Tạo nút
+            Button(
+                onClick = {
+                    try {
+                        val number = inputText.toInt()
+                        if (number > 0) {
+                            numberList = (1..number).toList()
+                            showError = false
+                        } else {
+                            showError = true
+                            numberList = emptyList()
+                        }
+                    } catch(e: NumberFormatException) {
+                        showError = true
+                        numberList = emptyList()
+                    }
+                },
+                modifier = Modifier
+                    .height(textFieldsHeight)
+                    .width(80.dp),
+                shape = RoundedCornerShape(18.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF2395f3),
+                    contentColor = Color.White
+                )
+            ) {
+                Text("Tạo", fontSize = 18.sp)
+            }
+        }
+
+        if(showError) {
+            Text(
+                text = "Dữ liệu bạn nhập không hợp lệ",
+                color = Color(0xFFe83d37),
+                modifier = Modifier.padding(8.dp)
+
+            )
+        }
+
+        // Hiển thị danh sách số
+        LazyColumn {
+            items(numberList) { number ->
+                Button(
+                    onClick = { },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Red,
+                        contentColor = Color.White
+                    )
+                ) {
+                    Text(
+                        text = number.toString(),
+                    )
+                }
+            }
         }
     }
 }
