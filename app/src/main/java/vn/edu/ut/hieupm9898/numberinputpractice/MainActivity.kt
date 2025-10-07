@@ -130,7 +130,7 @@ fun NumberInputApp() {
                     }
                 },
                 modifier = Modifier
-                    .height(textFieldsHeight)
+                    .defaultMinSize(minHeight = textFieldsHeight)
                     .width(80.dp),
                 shape = RoundedCornerShape(18.dp),
                 colors = ButtonDefaults.buttonColors(
